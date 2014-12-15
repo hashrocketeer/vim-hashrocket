@@ -112,7 +112,7 @@ call extend(g:rails_gem_projections, {
       \     "template": "Fabricator :%s do\nend",
       \     "affinity": "model"}},
       \ "factory_girl": {
-      \   "spec/factories/*_factory.rb": {
+      \   "spec/factories/*.rb": {
       \     "command": "factory",
       \     "alternate": "app/models/%s.rb",
       \     "related": "db/schema.rb#%p",
@@ -191,6 +191,10 @@ function! s:unused_steps(bang) abort
 endfunction
 
 command! -bang UnusedSteps call <SID>unused_steps("<bang>")
+
+if executable("ag")
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 augroup hashrocket
   autocmd!
